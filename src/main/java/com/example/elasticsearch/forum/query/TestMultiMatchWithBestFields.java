@@ -26,6 +26,7 @@ public class TestMultiMatchWithBestFields {
 	}
 
 	/*
+	 * best fields策略,是将某一个field匹配尽可能多的搜索关键词
 	 * title^2标识title这个field的权重是基础权重的两倍
 	 */
 	public static void sample(TransportClient client) throws Exception {
