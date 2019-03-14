@@ -14,7 +14,7 @@ import com.example.elasticsearch.util.ElasticSearchUtil;
  * @Date 2019年3月14日下午3:43:44
  * @Tags
  */
-public class TestMultiMatchWithMultiFields {
+public class TestMultiMatchWithMostFields {
 
 	// 准备测试数据
 	// POST /forum/article/_bulk
@@ -37,7 +37,7 @@ public class TestMultiMatchWithMultiFields {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
 		System.out.println("sample1的结果");
-		TestMultiMatchWithMultiFields.sample(client);
+		TestMultiMatchWithMostFields.sample(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
 	}
