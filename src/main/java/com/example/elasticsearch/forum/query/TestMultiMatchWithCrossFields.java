@@ -2,6 +2,7 @@ package com.example.elasticsearch.forum.query;
 
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder.Type;
 
@@ -48,7 +49,7 @@ public class TestMultiMatchWithCrossFields {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders
 						.multiMatchQuery("Peter Smith", new String[] { "author_first_name", "author_last_name" })
-						.type(Type.CROSS_FIELDS))
+						.operator(Operator.AND).type(Type.CROSS_FIELDS))
 				.get();
 		ElasticSearchUtil.showResults(response);
 	}
