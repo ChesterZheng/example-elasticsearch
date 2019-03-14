@@ -34,7 +34,6 @@ public class TestMultiMatchWithCrossFields {
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
-		System.out.println("sample1的结果");
 		TestMultiMatchWithCrossFields.sample(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
