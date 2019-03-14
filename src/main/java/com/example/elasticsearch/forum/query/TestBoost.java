@@ -19,7 +19,6 @@ public class TestBoost {
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
-		System.out.println("sample1的结果");
 		// 搜索标题中包含java，同时，如果标题中包含hadoop或elasticsearch就优先被搜索出来
 		// 如果一个帖子包含java hadoop，一个帖子包含java elasticsearch
 		// 那么hadoop的帖子要比elasticsearch的帖子优先被搜索出来
@@ -35,7 +34,7 @@ public class TestBoost {
 	 */
 	public static void sample1(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
-				.setQuery(QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("titile", "java"))
+				.setQuery(QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("title", "java"))
 						.should(QueryBuilders.matchQuery("title", "hadoop").boost(3))
 						.should(QueryBuilders.matchQuery("title", "elasticsearch").boost(2)))
 				.get();
