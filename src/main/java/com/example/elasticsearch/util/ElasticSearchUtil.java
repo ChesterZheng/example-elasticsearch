@@ -2,9 +2,11 @@ package com.example.elasticsearch.util;
 
 import java.net.InetAddress;
 
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
 /**
@@ -31,6 +33,24 @@ public class ElasticSearchUtil {
 		TransportClient client = new PreBuiltTransportClient(settings)
 				.addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
 		return client;
+	}
+
+	/**
+	 * 
+	 * @Author Chester_Zheng
+	 * @Description 打印搜索结果
+	 * @Date 2019年3月14日下午3:35:46
+	 * @Tags  @param response
+	 * @Tags  @throws Exception
+	 * @ReturnType void
+	 */
+	public static void showResults(SearchResponse response) throws Exception {
+		SearchHit[] hits = response.getHits().getHits();
+		for (int i = 0; i < hits.length; i++) {
+			float score = hits[i].getScore();
+			String sourceAsString = hits[i].getSourceAsString();
+			System.out.println("relevance score = " + score + " _source = " + sourceAsString);
+		}
 	}
 
 	/**

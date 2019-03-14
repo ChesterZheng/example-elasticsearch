@@ -3,7 +3,6 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -38,11 +37,7 @@ public class TestBoost {
 						.should(QueryBuilders.matchQuery("title", "hadoop").boost(3))
 						.should(QueryBuilders.matchQuery("title", "elasticsearch").boost(2)))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 }

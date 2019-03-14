@@ -3,7 +3,6 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -58,11 +57,7 @@ public class TestTermsFilter {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article").setQuery(
 				QueryBuilders.termsQuery("articleID.keyword", new String[] { "KDKE-B-9947-#kL5", "QQPX-R-3956-#aD8" }))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 	/*
@@ -75,11 +70,7 @@ public class TestTermsFilter {
 						QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("tag.keyword", new String[] { "java" }))
 								.must(QueryBuilders.termQuery("tag_cnt", 1)))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 }

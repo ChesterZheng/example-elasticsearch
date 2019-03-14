@@ -3,7 +3,6 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -53,11 +52,7 @@ public class TestRangeFilter {
 	public static void sample1(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.rangeQuery("view_cnt").gt(30).lt(60)).get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 	/*
@@ -69,11 +64,7 @@ public class TestRangeFilter {
 	public static void sample2(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.rangeQuery("postDate").gt("2019-03-13||-30d")).get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 }

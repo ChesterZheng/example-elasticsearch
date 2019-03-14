@@ -3,7 +3,6 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -56,11 +55,7 @@ public class TestBoolAndMultiFilter {
 						.should(QueryBuilders.termQuery("articleID.keyword", "XHDK-A-1293-#fJ3"))
 						.mustNot(QueryBuilders.termQuery("postDate", "2017-01-02")))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 	/*
@@ -77,11 +72,7 @@ public class TestBoolAndMultiFilter {
 								.must(QueryBuilders.termQuery("articleID.keyword", "JODL-X-1937-#pV7"))
 								.must(QueryBuilders.termQuery("postDate", "2017-01-01"))))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 }

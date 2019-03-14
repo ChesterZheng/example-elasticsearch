@@ -3,7 +3,6 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -45,12 +44,7 @@ public class TestDisMaxAndTieBreaker {
 				.setQuery(QueryBuilders.disMaxQuery().add(QueryBuilders.matchQuery("title", "java solution"))
 						.add(QueryBuilders.matchQuery("content", "java solution")))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			float score = hits[i].getScore();
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println("relevance score = " + score + " _source = " + sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 	/*
@@ -63,12 +57,7 @@ public class TestDisMaxAndTieBreaker {
 				.setQuery(QueryBuilders.disMaxQuery().add(QueryBuilders.matchQuery("title", "java solution"))
 						.add(QueryBuilders.matchQuery("content", "java solution")).tieBreaker(0.3f))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			float score = hits[i].getScore();
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println("relevance score = " + score + " _source = " + sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 }

@@ -4,7 +4,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -59,26 +58,17 @@ public class TestMatchAccuracy {
 		 */
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchQuery("title", "java elasticsearch")).get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 	/*
 	 * 相当于MySQL数据库查询语句 SELECT * FROM FORUM.ARTICLE WHERE TITLE LIKE
-	 * '%java%elasticsearch%' 
-	 * match+operator在es底层其实转换成为bool+must
+	 * '%java%elasticsearch%' match+operator在es底层其实转换成为bool+must
 	 */
 	public static void sample2(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchQuery("title", "java elasticsearch").operator(Operator.AND)).get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 
 	/*
@@ -89,10 +79,6 @@ public class TestMatchAccuracy {
 				.setQuery(
 						QueryBuilders.matchQuery("title", "java elasticsearch spark hadoop").minimumShouldMatch("75%"))
 				.get();
-		SearchHit[] hits = response.getHits().getHits();
-		for (int i = 0; i < hits.length; i++) {
-			String sourceAsString = hits[i].getSourceAsString();
-			System.out.println(sourceAsString);
-		}
+		ElasticSearchUtil.showResults(response);
 	}
 }
