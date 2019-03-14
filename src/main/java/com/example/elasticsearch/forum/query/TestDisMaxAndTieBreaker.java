@@ -7,7 +7,7 @@ import org.elasticsearch.search.SearchHit;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
-public class TestDisMax {
+public class TestDisMaxAndTieBreaker {
 
 	// 准备测试数据
 	// POST /forum/article/_bulk
@@ -27,7 +27,11 @@ public class TestDisMax {
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
-		TestDisMax.sample1(client);
+		System.out.println("sample1的结果");
+		TestDisMaxAndTieBreaker.sample1(client);
+		System.out.println("======================================================================");
+		System.out.println("sample2的结果");
+		TestDisMaxAndTieBreaker.sample2(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
 	}
@@ -40,6 +44,24 @@ public class TestDisMax {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.disMaxQuery().add(QueryBuilders.matchQuery("title", "java solution"))
 						.add(QueryBuilders.matchQuery("content", "java solution")))
+				.get();
+		SearchHit[] hits = response.getHits().getHits();
+		for (int i = 0; i < hits.length; i++) {
+			float score = hits[i].getScore();
+			String sourceAsString = hits[i].getSourceAsString();
+			System.out.println("relevance score = " + score + " _source = " + sourceAsString);
+		}
+	}
+
+	/*
+	 * tie_breaker参数的意义 在dis_max的基础上 将其他query的relevance score * tie_breaker
+	 * 并与relevance score分数最高的那个query综合一起计算最终的relevance score
+	 * tie_breaker取值范围在0-1之间
+	 */
+	private static void sample2(TransportClient client) throws Exception {
+		SearchResponse response = client.prepareSearch("forum").setTypes("article")
+				.setQuery(QueryBuilders.disMaxQuery().add(QueryBuilders.matchQuery("title", "java solution"))
+						.add(QueryBuilders.matchQuery("content", "java solution")).tieBreaker(0.3f))
 				.get();
 		SearchHit[] hits = response.getHits().getHits();
 		for (int i = 0; i < hits.length; i++) {
