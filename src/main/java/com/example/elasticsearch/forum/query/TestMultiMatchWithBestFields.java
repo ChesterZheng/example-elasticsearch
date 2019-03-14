@@ -3,6 +3,7 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder.Type;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -13,13 +14,13 @@ import com.example.elasticsearch.util.ElasticSearchUtil;
  * @Date 2019年3月14日下午3:29:52
  * @Tags
  */
-public class TestMultiMatch {
+public class TestMultiMatchWithBestFields {
 
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
 		System.out.println("sample1的结果");
-		TestMultiMatch.sample(client);
+		TestMultiMatchWithBestFields.sample(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
 	}
@@ -30,7 +31,7 @@ public class TestMultiMatch {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.multiMatchQuery("java solution", new String[] { "title^2", "content" })
-						.type("best_fields").tieBreaker(0.3f).minimumShouldMatch("50%"))
+						.type(Type.BEST_FIELDS).tieBreaker(0.3f).minimumShouldMatch("50%"))
 				.get();
 		ElasticSearchUtil.showResults(response);
 	}
