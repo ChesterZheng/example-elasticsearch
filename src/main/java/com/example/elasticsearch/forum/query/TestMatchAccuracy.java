@@ -42,7 +42,7 @@ public class TestMatchAccuracy {
 		TestMatchAccuracy.sample2(client);
 		System.out.println("======================================================================");
 		System.out.println("sample3的结果");
-		//搜索java,elasticsearch,spark,hadoop 4个关键字中，至少包含其中3个的blog
+		// 搜索java,elasticsearch,spark,hadoop 4个关键字中，至少包含其中3个的blog
 		TestMatchAccuracy.sample3(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
@@ -50,7 +50,7 @@ public class TestMatchAccuracy {
 
 	/*
 	 * 相当于MySQL数据库查询语句 SELECT * FROM FORUM.ARTICLE WHERE TITLE LIKE '%java%' OR
-	 * TITLE LIKE '%elasticsearch%'
+	 * TITLE LIKE '%elasticsearch%' match query 在es底层其实转换成为bool+should
 	 */
 	public static void sample1(TransportClient client) throws Exception {
 		/*
@@ -68,7 +68,8 @@ public class TestMatchAccuracy {
 
 	/*
 	 * 相当于MySQL数据库查询语句 SELECT * FROM FORUM.ARTICLE WHERE TITLE LIKE
-	 * '%java%elasticsearch%'
+	 * '%java%elasticsearch%' 
+	 * match+operator在es底层其实转换成为bool+must
 	 */
 	public static void sample2(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
@@ -79,7 +80,10 @@ public class TestMatchAccuracy {
 			System.out.println(sourceAsString);
 		}
 	}
-	
+
+	/*
+	 * match+minimumShouldMatch在es底层实际转换为bool+should+term+minimumShouldMatch
+	 */
 	public static void sample3(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(
