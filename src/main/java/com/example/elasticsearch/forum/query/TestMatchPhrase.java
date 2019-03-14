@@ -3,35 +3,39 @@ package com.example.elasticsearch.forum.query;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.MultiMatchQueryBuilder.Type;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
 /**
- * es multi match
+ * es match phrase
  * 
  * @Author Chester_Zheng
- * @Date 2019年3月14日下午3:29:52
+ * @Date 2019年3月14日下午5:13:25
  * @Tags
  */
-public class TestMultiMatchWithBestFields {
+public class TestMatchPhrase {
 
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
-		TestMultiMatchWithBestFields.sample(client);
+		TestMatchPhrase.sample(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
 	}
 
-	/*
-	 * best fields策略,是将某一个field匹配尽可能多的搜索关键词 title^2标识title这个field的权重是基础权重的两倍
+	/**
+	 * 
+	 * @Author Chester_Zheng
+	 * @Description 短语匹配
+	 * @Date 2019年3月14日下午5:25:08
+	 * @Tags  @param client
+	 * @Tags  @throws Exception
+	 * @ReturnType void
 	 */
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
-				.setQuery(QueryBuilders.multiMatchQuery("java solution", new String[] { "title^2", "content" })
-						.type(Type.BEST_FIELDS).tieBreaker(0.3f).minimumShouldMatch("50%"))
-				.get();
+				.setQuery(QueryBuilders.matchPhraseQuery("content", "java spark")).get();
 		ElasticSearchUtil.showResults(response);
 	}
+
 }
