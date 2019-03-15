@@ -6,6 +6,12 @@ import org.elasticsearch.index.query.QueryBuilders;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
+/**
+ * es dis_max and tie_breaker
+ * @Author Chester_Zheng
+ * @Date 2019年3月15日下午2:33:40
+ * @Tags
+ */
 public class TestDisMaxAndTieBreaker {
 
 	// 准备测试数据
