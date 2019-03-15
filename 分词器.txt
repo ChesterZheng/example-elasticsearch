@@ -9,3 +9,27 @@ ik中文分词器
 例如: "中华人民共和国国歌" ==> "中华人民共和国", "国歌"
 
 【注】：若不会安装中文分词器插件, 百度一下, 你就知道
+
+ik配置文件位置: ${elasticsearch.home}/plugins/ik/config/
+
+IKAnalyzer.cfg.xml	用来配置自定义词库
+main.dic							ik原生内置的中文词库
+quantifier.dic				单位词库(例如: 米, 厘米, 千克等)
+suffix.dic							后缀词库
+surname.dic					百家姓
+stopword.dic				英文停用词
+
+ik原生最重要的两个配置文件
+
+main.dic：包含了原生的中文词语，会按照这个里面的词语去分词
+stopword.dic：包含了英文的停用词，一般，像停用词，会在分词的时候，直接被干掉，不会建立在倒排索引中
+
+自定义词库
+1.自己建立词库(比如: 网红, 蓝瘦香菇,打call 等等)
+	自定义词库目录: ${elasticsearch.home}/plugins/ik/config/custom/mydict.dic
+2.补充自定义词库后, 需要重启es, 才能生效
+3.自己建立停用词库(比如: 的, 啥, 么 等等)
+	自定义停用词词库目录: ${elasticsearch.home}/plugins/ik/config/custom/ext_stopword.dic
+
+
+
