@@ -1,0 +1,83 @@
+TF&IDF&Length Norm算法
+
+TF 算法(Term Frequency)
+搜索词在一个document中出现的频率
+若搜索词在一个document中出现的频率越高, relevance score就会越高
+
+IDF算法(Inversed Document Frequency)
+搜索词在所有的document中出现的频率
+若搜索词在所有document中出现的频率越高, relevance score就会越低
+
+Length Norm
+搜索词在field中, field的数据长度越长, relevance score就会越低, field的数据长度越短, relevance score就会越高
+
+最后综合TF&IDF和Length Norm计算出一个term在一个document中的relevance score
+
+Vector Space Model(空间向量模型算法)
+1.ElasticSearch会根据搜索词在所有的document中的relevance score情况, 计算出一个Query Vector, Query向量
+2.将每个term的relevance score组成一个Document Vector
+3.将计算每个Document Vector与Query Vector之间的弧度, 给出每个document对多个term的总分数
+4.基于算出来的弧度, 给出一个document相对于query中多个term的总分数(弧度越大, 分数越低; 弧度越小, 分数越高)
+
+Lucene Practical Scoring Function
+score(q,d)  =  
+            queryNorm(q)  
+          · coord(q,d)    
+          · ∑ (           
+                tf(t in d)   
+              · idf(t)2      
+              · t.getBoost() 
+              · norm(t,d)    
+            ) (t in q) 
+
+score(q,d) score(q,d) is the relevance score of document d for query q.
+
+这个公式的最终结果，就是说是一个query（叫做q），对一个doc（叫做d）的最终的总评分
+
+queryNorm(q) is the query normalization factor (new).
+
+queryNorm，是用来让一个doc的分数处于一个合理的区间内，不要太离谱，举个例子，一个doc分数是10000，一个doc分数是0.1，这样肯定不好
+
+coord(q,d) is the coordination factor (new).
+
+简单来说，就是对更加匹配的doc，进行一些分数上的成倍的奖励
+
+The sum of the weights for each term t in the query q for document d.
+
+∑：求和的符号
+
+∑ (t in q)：query中每个term，query = hello world，query中的term就包含了hello和world
+
+query中每个term对doc的分数，进行求和，多个term对一个doc的分数，组成一个vector space，就在这一步
+
+tf(t in d) is the term frequency for term t in document d.
+
+计算每一个term对doc的分数的时候，就是TF/IDF算法
+
+idf(t) is the inverse document frequency for term t.
+
+t.getBoost() is the boost that has been applied to the query (new).
+
+norm(t,d) is the field-length norm, combined with the index-time field-level boost, if any. (new).
+
+2、query normalization factor
+
+queryNorm = 1 / √sumOfSquaredWeights
+
+sumOfSquaredWeights = 所有term的IDF分数之和，开一个平方根，然后做一个平方根分之1
+主要是为了将分数进行规范化 --> 开平方根，首先数据就变小了 --> 然后还用1去除以这个平方根，分数就会很小
+
+3、query coodination
+
+奖励那些匹配更多字符的doc更多的分数
+
+4、field level boost
+
+
+
+
+
+
+
+
+
