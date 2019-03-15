@@ -6,6 +6,13 @@ import org.elasticsearch.index.query.QueryBuilders;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
+/**
+ * es ngram提升搜索推荐功能性能
+ * 
+ * @Author Chester_Zheng
+ * @Date 2019年3月15日下午2:34:26
+ * @Tags
+ */
 public class TestNgram {
 
 	// 准备测试数据
