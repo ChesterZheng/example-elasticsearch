@@ -1,0 +1,5 @@
+1. query-time boost
+通过使用boost属性, 来增强某些搜索词的权重
+2. 重构查询结构
+3.negative boost
+4.使用constant_score
