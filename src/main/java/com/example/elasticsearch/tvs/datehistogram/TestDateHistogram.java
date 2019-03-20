@@ -47,6 +47,6 @@ public class TestDateHistogram {
 			System.out.println(soldDate_dateHistogramBucketList.get(i).getKeyAsString() + "="
 					+ soldDate_dateHistogramBucketList.get(i).getDocCount());
 		}
-
 	}
+	
 }
