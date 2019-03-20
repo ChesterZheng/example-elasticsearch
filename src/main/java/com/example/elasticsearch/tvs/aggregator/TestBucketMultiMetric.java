@@ -13,12 +13,12 @@ import org.elasticsearch.search.aggregations.metrics.avg.Avg;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
-public class TestBucketMultiMetrics {
+public class TestBucketMultiMetric {
 
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
-		TestBucketMultiMetrics.sample(client);
+		TestBucketMultiMetric.sample(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
 	}
