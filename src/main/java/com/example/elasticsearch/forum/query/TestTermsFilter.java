@@ -57,7 +57,7 @@ public class TestTermsFilter {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article").setQuery(
 				QueryBuilders.termsQuery("articleID.keyword", new String[] { "KDKE-B-9947-#kL5", "QQPX-R-3956-#aD8" }))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -70,7 +70,7 @@ public class TestTermsFilter {
 						QueryBuilders.boolQuery().must(QueryBuilders.termsQuery("tag.keyword", new String[] { "java" }))
 								.must(QueryBuilders.termQuery("tag_cnt", 1)))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

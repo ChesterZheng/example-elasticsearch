@@ -37,7 +37,7 @@ public class TestBoost {
 						.should(QueryBuilders.matchQuery("title", "hadoop").boost(3))
 						.should(QueryBuilders.matchQuery("title", "elasticsearch").boost(2)))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

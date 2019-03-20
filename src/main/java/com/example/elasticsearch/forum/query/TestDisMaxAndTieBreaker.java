@@ -50,7 +50,7 @@ public class TestDisMaxAndTieBreaker {
 				.setQuery(QueryBuilders.disMaxQuery().add(QueryBuilders.matchQuery("title", "java solution"))
 						.add(QueryBuilders.matchQuery("content", "java solution")))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -63,7 +63,7 @@ public class TestDisMaxAndTieBreaker {
 				.setQuery(QueryBuilders.disMaxQuery().add(QueryBuilders.matchQuery("title", "java solution"))
 						.add(QueryBuilders.matchQuery("content", "java solution")).tieBreaker(0.3f))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

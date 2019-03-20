@@ -55,7 +55,7 @@ public class TestBoolAndMultiFilter {
 						.should(QueryBuilders.termQuery("articleID.keyword", "XHDK-A-1293-#fJ3"))
 						.mustNot(QueryBuilders.termQuery("postDate", "2017-01-02")))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -72,7 +72,7 @@ public class TestBoolAndMultiFilter {
 								.must(QueryBuilders.termQuery("articleID.keyword", "JODL-X-1937-#pV7"))
 								.must(QueryBuilders.termQuery("postDate", "2017-01-01"))))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

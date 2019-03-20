@@ -51,7 +51,7 @@ public class TestMultiMatchWithCrossFields {
 						.multiMatchQuery("Peter Smith", new String[] { "author_first_name", "author_last_name" })
 						.operator(Operator.AND).type(Type.CROSS_FIELDS))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

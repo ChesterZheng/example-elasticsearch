@@ -30,7 +30,7 @@ public class TestRegexSearch {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("my_index").setTypes("my_type")
 				.setQuery(QueryBuilders.regexpQuery("title", "C[0-9].*45")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

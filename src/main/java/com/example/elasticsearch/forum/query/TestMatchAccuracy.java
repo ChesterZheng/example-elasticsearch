@@ -58,7 +58,7 @@ public class TestMatchAccuracy {
 		 */
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchQuery("title", "java elasticsearch")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -68,7 +68,7 @@ public class TestMatchAccuracy {
 	public static void sample2(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchQuery("title", "java elasticsearch").operator(Operator.AND)).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -79,6 +79,6 @@ public class TestMatchAccuracy {
 				.setQuery(
 						QueryBuilders.matchQuery("title", "java elasticsearch spark hadoop").minimumShouldMatch("75%"))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 }

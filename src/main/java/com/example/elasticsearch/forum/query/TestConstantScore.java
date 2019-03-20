@@ -22,6 +22,6 @@ public class TestConstantScore {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.constantScoreQuery(QueryBuilders.matchQuery("title", "java"))).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 }

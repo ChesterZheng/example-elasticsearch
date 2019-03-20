@@ -40,7 +40,7 @@ public class TestFunctionScore {
 												.modifier(Modifier.LOG1P).factor(0.5f))
 								.boostMode(CombineFunction.SUM).maxBoost(2))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

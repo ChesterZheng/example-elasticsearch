@@ -52,7 +52,7 @@ public class TestRangeFilter {
 	public static void sample1(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.rangeQuery("view_cnt").gt(30).lt(60)).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -64,7 +64,7 @@ public class TestRangeFilter {
 	public static void sample2(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.rangeQuery("postDate").gt("2019-03-13||-30d")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

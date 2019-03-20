@@ -44,7 +44,7 @@ public class TestFuzzy {
 	public static void sample1(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("my_index").setTypes("my_type")
 				.setQuery(QueryBuilders.fuzzyQuery("text", "surprize").fuzziness(Fuzziness.TWO)).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -54,7 +54,7 @@ public class TestFuzzy {
 		SearchResponse response = client.prepareSearch("my_index").setTypes("my_type").setQuery(
 				QueryBuilders.matchQuery("text", "SURPRIZE ME!").fuzziness(Fuzziness.AUTO).operator(Operator.AND))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

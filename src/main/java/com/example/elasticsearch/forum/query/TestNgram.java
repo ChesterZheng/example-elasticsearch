@@ -83,7 +83,7 @@ public class TestNgram {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("my_index").setTypes("my_type")
 				.setQuery(QueryBuilders.matchPhraseQuery("title", "hello w")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

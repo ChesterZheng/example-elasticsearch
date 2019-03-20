@@ -30,7 +30,7 @@ public class TestPhraseMatch {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchPhraseQuery("content", "java spark")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

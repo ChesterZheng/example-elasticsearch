@@ -52,6 +52,6 @@ public class TestIKAnalyzer {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("ik_index").setTypes("ik_type")
 				.setQuery(QueryBuilders.matchQuery("text", "16岁少女结婚好还是单身好")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 }

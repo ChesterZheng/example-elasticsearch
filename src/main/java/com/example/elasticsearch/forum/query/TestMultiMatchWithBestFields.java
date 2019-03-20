@@ -32,6 +32,6 @@ public class TestMultiMatchWithBestFields {
 				.setQuery(QueryBuilders.multiMatchQuery("java solution", new String[] { "title^2", "content" })
 						.type(Type.BEST_FIELDS).tieBreaker(0.3f).minimumShouldMatch("50%"))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 }

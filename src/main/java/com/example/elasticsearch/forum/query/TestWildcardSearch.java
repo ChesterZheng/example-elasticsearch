@@ -29,7 +29,7 @@ public class TestWildcardSearch {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("my_index").setTypes("my_type")
 				.setQuery(QueryBuilders.wildcardQuery("title", "C?D?-*5")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

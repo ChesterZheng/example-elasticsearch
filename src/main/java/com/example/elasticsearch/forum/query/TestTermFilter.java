@@ -53,7 +53,7 @@ public class TestTermFilter {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				// .setQuery(QueryBuilders.termQuery("articleID","XHDK-A-1293-#fJ3")).get();
 				.setQuery(QueryBuilders.termQuery("articleID.keyword", "XHDK-A-1293-#fJ3")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

@@ -32,6 +32,6 @@ public class TestMatchPhrasePrefix {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchPhrasePrefixQuery("title", "this is s").slop(10).maxExpansions(50)).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 }

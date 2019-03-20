@@ -40,7 +40,7 @@ public class TestRecallAndPrecision {
 						.minimumShouldMatch("50%")
 						.should(QueryBuilders.matchPhraseQuery("title", "java spark").slop(50)))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 	/*
@@ -53,7 +53,7 @@ public class TestRecallAndPrecision {
 						RescoreBuilder.queryRescorer(QueryBuilders.matchPhraseQuery("title", "java spark").slop(50)),
 						50)
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

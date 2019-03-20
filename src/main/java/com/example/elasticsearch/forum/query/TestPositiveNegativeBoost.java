@@ -24,7 +24,7 @@ public class TestPositiveNegativeBoost {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article").setQuery(QueryBuilders
 				.boostingQuery(QueryBuilders.matchQuery("title", "java"), QueryBuilders.matchQuery("title", "spark"))
 				.negativeBoost(0.5f)).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

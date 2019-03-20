@@ -48,6 +48,6 @@ public class TestMultiMatchWithMostFields {
 						QueryBuilders.multiMatchQuery("learning courses", new String[] { "sub_title", "sub_title.std" })
 								.type(Type.MOST_FIELDS))
 				.get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 }

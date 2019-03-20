@@ -56,7 +56,7 @@ public class TestPrefixSearch {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("my_index").setTypes("my_type")
 				.setQuery(QueryBuilders.prefixQuery("title", "C3")).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }

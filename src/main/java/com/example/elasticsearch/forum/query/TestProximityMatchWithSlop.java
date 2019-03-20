@@ -30,7 +30,7 @@ public class TestProximityMatchWithSlop {
 	public static void sample(TransportClient client) throws Exception {
 		SearchResponse response = client.prepareSearch("forum").setTypes("article")
 				.setQuery(QueryBuilders.matchPhraseQuery("content", "java best").slop(15)).get();
-		ElasticSearchUtil.showResults(response);
+		ElasticSearchUtil.showQueryResults(response);
 	}
 
 }
