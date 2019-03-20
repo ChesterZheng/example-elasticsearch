@@ -1,8 +1,14 @@
 package com.example.elasticsearch.tvs.aggregator;
 
+import java.util.List;
+import java.util.Map;
+
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.StringTerms.Bucket;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
@@ -64,11 +70,21 @@ public class TestBucket {
 		ElasticSearchUtil.destory(client);
 	}
 
+	/*
+	 * 相当于MySQL的查询语句 SELECT COUNT(1) FROM TVS.SALES GROUP BY COLOR
+	 */
 	public static void sample(TransportClient client) throws Exception {
 		String aggsName = "aggregation_popular_colors";
 		SearchResponse response = client.prepareSearch("tvs").setTypes("sales")
 				.addAggregation(AggregationBuilders.terms(aggsName).field("color")).setSize(0).get();
-		ElasticSearchUtil.showAggregationResults(response, aggsName);
+		Map<String, Aggregation> aggregationMap = response.getAggregations().asMap();
+		StringTerms stringTerms = (StringTerms) aggregationMap.get(aggsName);
+		String name = stringTerms.getName();
+		System.out.println(name);
+		List<Bucket> buckets = stringTerms.getBuckets();
+		for (int i = 0; i < buckets.size(); i++) {
+			System.out.println(buckets.get(i).getKey() + "=" + buckets.get(i).getDocCount());
+		}
 	}
 
 }
