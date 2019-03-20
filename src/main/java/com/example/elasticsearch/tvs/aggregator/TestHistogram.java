@@ -31,7 +31,7 @@ public class TestHistogram {
 		String sumPriceStr = "sum_price";
 		SearchResponse response = client.prepareSearch("tvs").setTypes("sales")
 				.addAggregation(AggregationBuilders.histogram(groupByPriceStr).field("price").interval(2000)
-						.subAggregation(AggregationBuilders.sum(sumPriceStr).field("price")))
+						.subAggregation(AggregationBuilders.sum(sumPriceStr).field("price"))).setSize(0)
 				.get();
 		Map<String, Aggregation> aggsMap = response.getAggregations().asMap();
 		InternalHistogram groupByPriceHistogram = (InternalHistogram) aggsMap.get(groupByPriceStr);
