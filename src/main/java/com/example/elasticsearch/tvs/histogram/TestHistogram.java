@@ -1,4 +1,4 @@
-package com.example.elasticsearch.tvs.aggregator;
+package com.example.elasticsearch.tvs.histogram;
 
 import java.util.List;
 import java.util.Map;
