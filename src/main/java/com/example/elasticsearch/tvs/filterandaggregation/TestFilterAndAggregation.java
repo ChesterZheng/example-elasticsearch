@@ -30,4 +30,5 @@ public class TestFilterAndAggregation {
 		Avg avgPrice = (Avg) aggsMap.get("avg_price");
 		System.out.println(avgPrice.getName() + "=" + avgPrice.getValue());
 	}
+	
 }
