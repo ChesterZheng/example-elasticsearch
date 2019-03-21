@@ -59,8 +59,9 @@ public class TestPercentiles {
 		InternalTDigestPercentiles percentiles = (InternalTDigestPercentiles) aggsMap.get("latency_percentiles");
 		System.out.println(percentiles.getName());
 		Iterator<Percentile> iterator = percentiles.iterator();
+		Percentile percentile = null;
 		while (iterator.hasNext()) {
-			Percentile percentile = iterator.next();
+			percentile = iterator.next();
 			System.out.println(percentile.getPercent() + "=" + percentile.getValue());
 		}
 	}
