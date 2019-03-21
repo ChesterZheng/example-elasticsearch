@@ -1,4 +1,4 @@
-package com.example.elasticsearch.tvs.filterandaggregation;
+package com.example.elasticsearch.tvs.filter.aggregation;
 
 import java.util.Map;
 

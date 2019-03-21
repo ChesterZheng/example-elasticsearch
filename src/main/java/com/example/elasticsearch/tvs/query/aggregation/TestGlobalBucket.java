@@ -1,4 +1,4 @@
-package com.example.elasticsearch.tvs.queryandaggregation;
+package com.example.elasticsearch.tvs.query.aggregation;
 
 import java.util.Map;
 

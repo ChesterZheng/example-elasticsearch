@@ -1,4 +1,4 @@
-package com.example.elasticsearch.tvs.bucketfilter;
+package com.example.elasticsearch.tvs.bucket.filter;
 
 import java.util.Map;
 
