@@ -1,4 +1,4 @@
-package com.example.elasticsearch.tvs.filter.aggregation;
+package com.example.elasticsearch.tvs.aggregation.filter;
 
 import java.util.Map;
 
@@ -11,12 +11,12 @@ import org.elasticsearch.search.aggregations.metrics.avg.Avg;
 
 import com.example.elasticsearch.util.ElasticSearchUtil;
 
-public class TestFilterAndAggregation {
+public class TestAggregationFilter {
 
 	public static void main(String[] args) throws Exception {
 		// 初始化
 		TransportClient client = ElasticSearchUtil.init();
-		TestFilterAndAggregation.sample(client);
+		TestAggregationFilter.sample(client);
 		// 销毁
 		ElasticSearchUtil.destory(client);
 	}
