@@ -1,4 +1,4 @@
-package com.example.elasticsearch.tvs.datehistogram;
+package com.example.elasticsearch.tvs.queryandaggregation;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,6 @@ import java.util.Map;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.Aggregation;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
